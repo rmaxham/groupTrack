@@ -23,7 +23,7 @@
 
 .gttoggle {
 	width: 85%;
-	background-color: rgba(1,1,1,0.2);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#363738), to(#414243));
 	border: 1px solid #999999;
 	color: #777;
 	display: block;
@@ -31,13 +31,14 @@
 	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: 4px;
-	padding: 4px 4px;
+	padding: 8px 4px;
 	text-decoration: none;
 	-webkit-border-radius: 8px;
 	-webkit-touch-callout: none;
 }
 
 .gttoggle.checked {
-	background-color: #eee;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EDEEEE), to(#9A9A9A));
+	border: 1px solid #B3B3B3;
 	color: #222222;
 }
