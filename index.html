@@ -1,0 +1,160 @@
+<html>
+<head>
+	<title>Group Track</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="jqtouch/jqtouch.css">
+	<link type="text/css" rel="stylesheet" media="screen" href="themes/jqt/theme.css">
+	<link type="text/css" rel="stylesheet" media="screen" href="grouptrack.css">
+	<script type="text/javascript" src="jqtouch/jquery.js"></script>
+	<script type="text/javascript" src="jqtouch/jqtouch.js"></script>
+	<script type="text/javascript" src="GTData.js"></script>
+	<script type="text/javascript" src="grouptrack.js"></script>
+</head>
+<body>
+	<!--* HOME **********************************************-->
+	<div id="home">
+		<div class="toolbar">
+			<h1>Group Track</h1>
+        	<a class="button flip" href="#settings">Settings</a>
+        </div>
+		<ul class="edgetoedge">
+			<li class="arrow"><a href="#people">People</a></li>
+			<li class="arrow"><a href="#expenses">Expenses</a></li>
+			<li class="arrow"><a href="#about">About</a></li>
+		</ul>
+	</div>
+
+	<!--* ABOUT **********************************************-->
+	<div id="about">
+		<div class="toolbar">
+			<h1>About</h1>
+			<a class="button back" href="#">Back</a>
+		</div>
+		<div>
+			<p>Group Track lets you and your friends track who paid for what on a trip.</p>
+		</div>
+	</div>
+
+	<!--* PEOPLE **********************************************-->
+	<div id="people">
+		<div class="toolbar">
+			<h1>People</h1>
+			<a class="button back" href="#">Back</a>
+			<a class="button slideup" href="#createPerson">+</a>
+		</div>
+		<ul class="edgetoedge">
+			<li id="personTemplate" class="person" style="display:none">
+				<span class="name">name</span>
+				<span class="symbol">(*)</span>
+				<span class="delete">Delete</span>
+            </li>
+			<li class="arrow"><a id="D" href="#person">Dug</a></li>
+			<li class="arrow"><a id="R" href="#person">Rus</a></li>
+			<li class="arrow"><a id="C" href="#person">Chut</a></li>
+			<li class="arrow"><a id="M" href="#person">Mic</a></li>
+		</ul>
+	</div>
+
+	<!--* CREATE PERSON **********************************************-->
+	<div id="createPerson">
+		<div class="toolbar">
+			<h1>New Person</h1>
+			<a class="button cancel" href="#">Cancel</a>
+		</div>
+		<form method="post">
+			<ul>
+				<li><input type="text" placeholder="Name" name="name" id="name" 
+					 autocapitalize="on" autocorrect="off" autocomplete="off" /></li>
+				<li><input type="text" placeholder="Symbol" name="symbol" id="symbol" 
+					 autocapitalize="on" autocorrect="off" autocomplete="off" /></li>
+				<li><input type="submit" class="submit" name="action"
+					value="Save Person" /></li>
+			</ul>
+		</form>
+	</div>
+
+	<!--* EXPENSES **********************************************-->
+	<div id="expenses">
+		<div class="toolbar">
+			<h1>Expenses</h1>
+			<a class="button back" href="#">Back</a>
+			<a class="button slideup" href="#createExpense">+</a>
+		</div>
+		<ul class="edgetoedge">
+			<li class="arrow"><a id="0" href="#expense">airfare</a></li>
+			<li class="arrow"><a id="1" href="#expense">hotel</a></li>
+			<li class="arrow"><a id="2" href="#expense">food</a></li>
+			<li class="arrow"><a id="3" href="#expense">booze</a></li>
+		</ul>
+	</div>
+
+	<!--* EXPENSE **********************************************-->
+	<div id="expense">
+		<div class="toolbar">
+			<h1>Expense</h1>
+			<a class="button back" href="#">Back</a>
+		</div>
+		<ul class="edgetoedge">
+			<li id="expenseTemplate" class="entry" style="display:none">
+				<span class="date">2010-10-14 8:15pm</span>
+				<span class="desc">description</span>
+				<span class="amount">$0.00</span>
+				<span class="payer">payer</span>
+				<span class="recipients">payer</span>
+				<span class="delete">Delete</span>
+			</li>
+		</ul>
+	</div>
+
+	<!--* CREATE EXPENSE **********************************************-->
+	<div id="createExpense">
+		<div class="toolbar">
+			<h1>New Expense</h1>
+			<a class="button cancel" href="#">Cancel</a>
+		</div>
+		<form method="post">
+			<ul>
+				<li><input type="text" placeholder="Description" name="desc" id="desc" 
+					 autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
+				<li>$<input type="number" placeholder="" name="amount" id="amount" 
+					 autocapitalize="on" autocorrect="off" autocomplete="off" /></li>
+				<li>
+					<select id="payer">
+						<option value ="D">Dug</option>
+						<option value ="R">Rus</option>
+						<option value ="C">Chut</option>
+						<option value ="M">Mic</option>
+					</select>
+ 				</li>
+ 				<li>
+                    <input type="checkbox" name="recipient" value="D" id="recipient" title="Dug" /><br>
+                    <input type="checkbox" name="recipient" value="R" id="recipient" title="Rus" /><br>
+                    <input type="checkbox" name="recipient" value="C" id="recipient" title="Chut" /><br>
+                    <input type="checkbox" name="recipient" value="M" id="recipient" title="Mic" /><br>
+                </li>
+				<li><input type="submit" class="submit" name="action"
+					value="Save Expense" /></li>
+			</ul>
+		</form>
+	</div>
+
+	<!--* SETTINGS **********************************************-->
+	<div id="settings">
+		<div class="toolbar">
+			<h1>Settings</h1>
+			<a class="button cancel" href="#">Cancel</a>
+		</div>
+		<form method="post">
+			<ul>
+				<li>gDocs URL<input placeholder="" type="url" name="gdocsurl" id="gdocsurl" 
+								autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
+				<li>Username<input placeholder="" type="text" name="username" id="username" 
+								autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
+				<li>Password<input placeholder="" type="password" name="password" id="password" /></li>
+				<li><input type="submit" class="submit" name="action" 
+					value="Save Changes" /></li>
+			</ul>
+		</form>
+	</div>
+	
+</body>
+</html>
