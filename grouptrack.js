@@ -18,6 +18,9 @@ $(document).ready(function(){
     $('#createPerson form').submit(createPerson);
     $('#createPerson').bind('pageAnimationStart', createPersonWillShow);
     
+    // -- configure the expenses panels
+    $('#createExpense form').submit(createExpense);
+    
 	// -- configure the database
     gtdata = new GTData();
 	gtdata.addPeopleChangedListener(peopleChanged);
@@ -117,6 +120,10 @@ function peopleChanged() {
 function loadPeople(result) {
 	
 	$('#people ul li:gt(0)').remove();
+	var payer = $('#payer');
+	payer.find('option').remove();
+	$('#recipients div:gt(0)').remove();
+	var cols = $('#recipients td');
 
 	for (var i = 0; i < result.rows.length; ++i) {
 		var row = result.rows.item(i);
@@ -129,7 +136,23 @@ function loadPeople(result) {
 		newEntryRow.find('.name').text(row.name);
 		newEntryRow.find('.symbol').text("(" + row.id + ")");
 		newEntryRow.find('.delete').click(deletePerson);
+		
+		var newOption = document.createElement('option');
+		newOption.value = row.id;
+		newOption.text = row.name;
+		payer.append(newOption);
+		
+		var newRecipient = $('#recipientTemplate').clone();
+		newRecipient.removeAttr('id');
+		newRecipient.removeAttr('style');
+		newRecipient.appendTo(cols[i % cols.length]);
+		newRecipient.text(row.name);
+		newRecipient.val(row.id);
+		newRecipient.attr('id', 'recipient');
 	}
+
+	// hook up any gttoggle's we created to their handler
+	$('.gttoggle').tap(gttoggleClicked);
 }
 
 
@@ -141,5 +164,42 @@ function expenseWillShow() {
 	$('#person h1').text(this.text);
 }
 
+function createExpense() {
+}
+
 function expensesChanged() {
 }
+
+/////////////////////////////////////////////////////////////////////
+// GROUP TRACK TOGGLE //////////////////////////////////////////////
+
+function gttoggleClicked() {
+	if (this.lastTapTime !== undefined) {
+		var timeDiff = (new Date()).getTime() - this.lastTapTime;
+		if (timeDiff < 300) {
+			gttoggleDblClicked(this);
+			return;
+		}
+	}
+
+	if (this.checked) {
+		$(this).removeClass('checked');
+		this.checked = false;
+	} else {
+		$(this).addClass('checked');
+		this.checked = true;
+	}
+	this.lastTapTime = (new Date()).getTime();
+}
+
+function gttoggleDblClicked(el) {
+	var all = $(el).parent().parent().find('.gttoggle');
+	if (!el.checked) {
+		all.removeClass('checked');
+		all.attr('checked', false);
+	} else {
+		all.addClass('checked');
+		all.attr('checked', true);
+	}
+}
+

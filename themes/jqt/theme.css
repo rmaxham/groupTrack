@@ -263,10 +263,11 @@ ul li textarea {
 }
 ul li select {
     text-indent: 0px;
+    font-weight: bold;
     background: transparent url(img/chevron.png) no-repeat right center;
     -webkit-appearance: textfield;
-    margin-left: -6px;
-    width: 104%;
+    margin-left: 0px;
+    width: 100%;
 }
 ul li input[type="checkbox"], ul li input[type="radio"] {
     margin: 0;

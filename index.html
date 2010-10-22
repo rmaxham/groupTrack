@@ -15,6 +15,7 @@
 		<div class="toolbar">
 			<h1>Group Track</h1>
         	<a class="button flip" href="#settings">Settings</a>
+			<!-- a class="button slideup" href="#createExpense">+</a -->
         </div>
 		<ul class="edgetoedge">
 			<li class="arrow"><a href="#people">People</a></li>
@@ -43,8 +44,8 @@
 		</div>
 		<ul class="edgetoedge">
 			<li id="personTemplate" class="person" style="display:none">
-				<span class="name">name</span>
 				<span class="symbol">(*)</span>
+				<span class="name">name</span>
 				<span class="delete">Delete</span>
             </li>
 			<li class="arrow"><a id="D" href="#person">Dug</a></li>
@@ -118,18 +119,16 @@
 				<li>$<input type="number" placeholder="" name="amount" id="amount" 
 					 autocapitalize="on" autocorrect="off" autocomplete="off" /></li>
 				<li>
-					<select id="payer">
-						<option value ="D">Dug</option>
-						<option value ="R">Rus</option>
-						<option value ="C">Chut</option>
-						<option value ="M">Mic</option>
+					Payer &nbsp;
+					<select id="payer" style='width:75%'>
 					</select>
  				</li>
- 				<li>
-                    <input type="checkbox" name="recipient" value="D" id="recipient" title="Dug" /><br>
-                    <input type="checkbox" name="recipient" value="R" id="recipient" title="Rus" /><br>
-                    <input type="checkbox" name="recipient" value="C" id="recipient" title="Chut" /><br>
-                    <input type="checkbox" name="recipient" value="M" id="recipient" title="Mic" /><br>
+ 				<li id="recipients">
+ 					Recipients
+ 					<div id="recipientTemplate" class="gttoggle touch" style="display:none">name</div>
+ 					<table width='100%' style='margin-top:4px'>
+ 						<tr><td></td><td></td><td></td></tr>
+ 					</table>
                 </li>
 				<li><input type="submit" class="submit" name="action"
 					value="Save Expense" /></li>
