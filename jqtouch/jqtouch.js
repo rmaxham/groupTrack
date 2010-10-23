@@ -26,9 +26,11 @@
 (function($) {
     $.jQTouch = function(options) {
         
+		var uagent = navigator.userAgent.toLowerCase();
+
         // Set support values
         $.support.WebKitCSSMatrix = (typeof WebKitCSSMatrix == "object");
-        $.support.touch = (typeof Touch == "object");
+        $.support.touch = (typeof Touch == "object") || (uagent.search('android') > -1);
         $.support.WebKitAnimationEvent = (typeof WebKitTransitionEvent == "object");
         
         // Initialize internal variables

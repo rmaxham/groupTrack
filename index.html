@@ -35,6 +35,25 @@
 		</div>
 	</div>
 
+	<!--* SETTINGS **********************************************-->
+	<div id="settings">
+		<div class="toolbar">
+			<h1>Settings</h1>
+			<a class="button cancel" href="#">Cancel</a>
+		</div>
+		<form method="post">
+			<ul>
+				<li>gDocs URL<input placeholder="" type="url" name="gdocsurl" id="gdocsurl" 
+								autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
+				<li>Username<input placeholder="" type="text" name="username" id="username" 
+								autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
+				<li>Password<input placeholder="" type="password" name="password" id="password" /></li>
+				<li><center><input type="submit" class="submit" name="action" 
+					value="Save Changes" /></center></li>
+			</ul>
+		</form>
+	</div>
+	
 	<!--* PEOPLE **********************************************-->
 	<div id="people">
 		<div class="toolbar">
@@ -67,8 +86,8 @@
 					 autocapitalize="on" autocorrect="off" autocomplete="off" /></li>
 				<li><input type="text" placeholder="Symbol" name="symbol" id="symbol" 
 					 autocapitalize="on" autocorrect="off" autocomplete="off" /></li>
-				<li><input type="submit" class="submit" name="action"
-					value="Save Person" /></li>
+				<li><center><input type="submit" class="submit" name="action"
+					value="Save Person" /></center></li>
 			</ul>
 		</form>
 	</div>
@@ -78,9 +97,12 @@
 		<div class="toolbar">
 			<h1>Expenses</h1>
 			<a class="button back" href="#">Back</a>
-			<a class="button add slideup" href="#createExpense">+</a>
+			<a class="button add slideup" href="#editExpense">+</a>
 		</div>
 		<ul class="edgetoedge">
+			<li id="expenseTemplate" class="arrow" style="display:none"><a id="0" href="#expense">
+				<span class="desc">description</span></a></li>
+				
 			<li class="arrow"><a id="0" href="#expense">airfare</a></li>
 			<li class="arrow"><a id="1" href="#expense">hotel</a></li>
 			<li class="arrow"><a id="2" href="#expense">food</a></li>
@@ -94,20 +116,19 @@
 			<h1>Expense</h1>
 			<a class="button back" href="#">Back</a>
 		</div>
-		<ul class="edgetoedge">
-			<li id="expenseTemplate" class="entry" style="display:none">
-				<span class="date">2010-10-14 8:15pm</span>
-				<span class="desc">description</span>
-				<span class="amount">$0.00</span>
-				<span class="payer">payer</span>
-				<span class="recipients">payer</span>
-				<span class="delete">Delete</span>
-			</li>
+		<ul>
+			<li><span class="date">date</span></li>
+			<li><span class="desc">description</span></li>
+			<li>$<span class="amount">amount</span></li>
+			<li><span class="payer">payer</span></li>
+			<li><span class="recipients">recipients</span></li>
+			<li><center><input type="submit" class="delete" name="action"
+				value="Delete Expense" /></center></li>
 		</ul>
 	</div>
 
-	<!--* CREATE EXPENSE **********************************************-->
-	<div id="createExpense">
+	<!--* EDIT EXPENSE **********************************************-->
+	<div id="editExpense">
 		<div class="toolbar">
 			<h1>New Expense</h1>
 			<a class="button cancel" href="#">Cancel</a>
@@ -130,30 +151,11 @@
  						<tr><td></td><td></td><td></td></tr>
  					</table>
                 </li>
-				<li><input type="submit" class="submit" name="action"
-					value="Save Expense" /></li>
+				<li><center><input type="submit" class="submit" name="action"
+					value="Save Expense" /></center></li>
 			</ul>
 		</form>
 	</div>
 
-	<!--* SETTINGS **********************************************-->
-	<div id="settings">
-		<div class="toolbar">
-			<h1>Settings</h1>
-			<a class="button cancel" href="#">Cancel</a>
-		</div>
-		<form method="post">
-			<ul>
-				<li>gDocs URL<input placeholder="" type="url" name="gdocsurl" id="gdocsurl" 
-								autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
-				<li>Username<input placeholder="" type="text" name="username" id="username" 
-								autocapitalize="off" autocorrect="off" autocomplete="off" /></li>
-				<li>Password<input placeholder="" type="password" name="password" id="password" /></li>
-				<li><input type="submit" class="submit" name="action" 
-					value="Save Changes" /></li>
-			</ul>
-		</form>
-	</div>
-	
 </body>
 </html>

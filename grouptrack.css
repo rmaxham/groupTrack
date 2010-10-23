@@ -16,9 +16,43 @@
     -webkit-border-image: url(themes/jqt/img/button.png) 0 5 0 5;
 }
 
-#createExpense td {
+#editExpense td {
 	width: 33%;
 	vertical-align: top;
+}
+
+#expense ul li {
+    color: #aaa;
+	font-weight: normal;
+    text-shadow: rgba(0,0,0,.7) 0 1px 2px;
+}
+
+#expense ul li span {
+    color: #FFFFFF;
+	font-weight: normal;
+    text-shadow: rgba(0,0,0,.7) 0 1px 2px;
+}
+
+ul li input[type="submit"] {
+	color: #222222;
+	border: 1px solid #999999;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EDEEEE), to(#9A9A9A));
+    border: 0;
+    font: normal 17px Helvetica;
+	padding: 4px 4px;
+    display: inline-block;
+    margin-left: 0px;
+    width: 90%;
+    -webkit-appearance: textarea;
+}
+
+#expense .delete {
+	color: #fff;
+    text-shadow: rgba(0,0,0,.7) 0 -1px 0px;
+	font-weight: bold;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ED1111), to(#9A1111));
+	border: 1px solid #111111;
+	-webkit-border-radius: 6px;
 }
 
 .gttoggle {

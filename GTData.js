@@ -1,17 +1,16 @@
 (function(){
 function GTData () {
 
-	//this.peopleChangedListeners = [];
 	try {
 		if (window.openDatabase) {
-			this.db = openDatabase("GroupTrack", "1.0", "GroupTrack DB", 200000);
+			this.db = openDatabase("GroupTrack2", "1.1", "GroupTrack Db 1.1", 200000);
 			if (!this.db)
 				alert("Failed to open the database on disk.  This is probably because the version was bad or there is not enough space left in this domain's quota");
 		} else
 			alert("Couldn't open the database.  Please try with a WebKit nightly with this feature enabled");
 	} catch(err) {
 		this.db = null;
-		alert("Couldn't open the database.  Please try with a WebKit nightly with this feature enabled");
+		alert("Couldn't open the database.  The database may need upgrading or the upgrade failed somehow.");
 	}
 
 }
@@ -101,18 +100,20 @@ GTData.prototype = {
 		});
 	},
 
-	newExpense: function (record)
+	newExpense: function (record, success_callback, error_callback)
 	{
 		var self = this;
 		this.db.transaction(function (tx) 
 		{
-			tx.executeSql("INSERT INTO GroupTrackExpenses (desc, amount, payer, recipients, timestamp) VALUES (?, ?, ?, ?, ?, ?)", 
+			tx.executeSql("INSERT INTO GroupTrackExpenses (desc, amount, payer, recipients, timestamp) VALUES (?, ?, ?, ?, ?)", 
 														[record.desc, record.amount, record.payer, record.recipients, record.timestamp]);
 		}, function(error) {
-			var msg = error.message;
-			alert('Failed to add expense - ' + msg);
+			if (error_callback !== undefined)
+				error_callback(error);
 		}, function() {
 			self.expensesChanged();
+			if (success_callback !== undefined)
+				success_callback();
 		});
 	},
 	
