@@ -17,12 +17,13 @@ $(document).ready(function(){
 	// -- configure the people panels
     $('#createPerson form').submit(createPerson);
     $('#createPerson').bind('pageAnimationStart', willShowCreatePerson);
-	$('#expense .delete').click(clickedDeleteExpense);
 	$('#name').change(changedNameInput);
 
     
     // -- configure the expenses panels
     $('#editExpense form').submit(createExpense);
+    $('#expenses .add').click(clickedCreateExpense);
+	$('#expense .delete').click(clickedDeleteExpense);
     
 	// -- configure the database
     gtdata = new GTData();
@@ -93,6 +94,20 @@ function changedNameInput() {
 		$('#symbol').val( val.charAt(0).toUpperCase() );
 }
 
+//------------------------------------------------------------------
+
+function clickedDeletePerson(id, name)
+{
+	var clickedEntry = $(this).parent();
+	var id = clickedEntry.data('personId');
+	var name = clickedEntry.find('.name').text();
+
+	var result = confirm('are you sure you want to delete ' + name + ' (' + id + ')?');
+	if (result) {
+		gtdata.deletePerson(id);
+	}
+}
+
 //-------------------------------------------------------------------
 
 function createPerson() {
@@ -129,20 +144,6 @@ function createPersonError(error) {
 
 function createPersonSuccess() {
 	jQT.goBack();
-}
-
-//------------------------------------------------------------------
-
-function clickedDeletePerson(id, name)
-{
-	var clickedEntry = $(this).parent();
-	var id = clickedEntry.data('personId');
-	var name = clickedEntry.find('.name').text();
-
-	var result = confirm('are you sure you want to delete ' + name + ' (' + id + ')?');
-	if (result) {
-		gtdata.deletePerson(id);
-	}
 }
 
 //------------------------------------------------------------------
@@ -191,9 +192,37 @@ function loadPeople(result) {
 	$('.gttoggle').bind($.support.touch ? 'touchstart' : 'mousedown', gttoggleClicked);
 }
 
-
 /////////////////////////////////////////////////////////////////////
 // EXPENSES ////////////////////////////////////////////////////////
+
+function clickedCreateExpense() {
+	$('#desc').val("");
+	$('#amount').val("");
+}
+
+//------------------------------------------------------------------
+
+function clickedExpense() {
+	$('#expense h1').text(this.text);
+	gtdata.getExpense($(this).parent().data('expenseId'), loadExpense);
+}
+
+//------------------------------------------------------------------
+
+function clickedDeleteExpense() {
+
+	var expense = $(this).data('expenseId');
+	
+	var result = confirm('are you sure you want to delete this expense?');
+	if (result)
+	{
+		gtdata.deleteExpense(expense);
+		jQT.goBack();
+	}
+	
+}
+
+//------------------------------------------------------------------
 
 function createExpense() {
 	var record = {
@@ -207,7 +236,7 @@ function createExpense() {
 	var recp = $('#recipients .gttoggle');
 	for (var i=0; i < recp.length; i++)
 	{
-		if (recp[i].checked)
+		if ($(recp[i]).hasClass('checked'))
 			record.recipients += recp[i].value;
 	}
 	
@@ -277,13 +306,6 @@ function loadExpenses(result)
 
 //------------------------------------------------------------------
 
-function clickedExpense() {
-	$('#expense h1').text(this.text);
-	gtdata.getExpense($(this).parent().data('expenseId'), loadExpense);
-}
-
-//------------------------------------------------------------------
-
 function loadExpense(result) {
 	$('#expense .date').text( dateString( result.timestamp ) );
 	$('#expense .desc').text( result.desc );
@@ -291,21 +313,6 @@ function loadExpense(result) {
 	$('#expense .payer').text( result.payer );
 	$('#expense .recipients').text( result.recipients );
 	$('#expense .delete').data( 'expenseId', result.id );
-}
-
-//------------------------------------------------------------------
-
-function clickedDeleteExpense() {
-
-	var expense = $(this).data('expenseId');
-	
-	var result = confirm('are you sure you want to delete this expense?');
-	if (result)
-	{
-		gtdata.deleteExpense(expense);
-		jQT.goBack();
-	}
-	
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -320,12 +327,11 @@ function gttoggleClicked() {
 		}
 	}
 
-	if (this.checked) {
+	var checked = $(this).hasClass('checked');
+	if (checked) {
 		$(this).removeClass('checked');
-		this.checked = false;
 	} else {
 		$(this).addClass('checked');
-		this.checked = true;
 	}
 	this.lastTapTime = (new Date()).getTime();
 }
@@ -334,12 +340,11 @@ function gttoggleClicked() {
 
 function gttoggleDblClicked(el) {
 	var all = $(el).parent().parent().find('.gttoggle');
-	if (!el.checked) {
+	var checked = $(el).hasClass('checked');
+	if (!checked) {
 		all.removeClass('checked');
-		all.attr('checked', false);
 	} else {
 		all.addClass('checked');
-		all.attr('checked', true);
 	}
 }
 
